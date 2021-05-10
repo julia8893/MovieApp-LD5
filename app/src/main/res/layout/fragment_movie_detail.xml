@@ -9,6 +9,10 @@
     <variable
         name="movie"
         type="com.example.mad03_fragments_and_navigation.models.Movie" />
+
+    <variable
+        name="viewModel_movieFavorites"
+        type="com.example.mad03_fragments_and_navigation.viewmodels.MovieFavoritesViewModel" />
 </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
