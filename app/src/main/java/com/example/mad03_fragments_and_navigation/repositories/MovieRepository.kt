@@ -44,7 +44,7 @@ class MovieRepository(private val movieDao: MovieDao) {
             movieDao.clearTable()
         }
 
-    suspend fun getAll(): LiveData<List<Movie>> {
+    fun getAll(): LiveData<List<Movie>> {
         return movieDao.getAll()
     }
 

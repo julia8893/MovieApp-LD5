@@ -23,8 +23,9 @@ class MovieDetailFragment : Fragment() {
     private lateinit var binding: FragmentMovieDetailBinding
     private lateinit var sharedViewModel: MovieFavoritesViewModel
     private lateinit var dao: MovieDao
+    private lateinit var repository: MovieRepository
     private lateinit var factory: MovieFavoritesViewModelFactory
-    private lateinit var movieRepository: MovieRepository
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,10 +34,13 @@ class MovieDetailFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_movie_detail, container, false)
 
-        dao = AppDatabase.getInstance(requireActivity().application).MovieDao
-        val instance = MovieRepository.getInstance(dao)
-        movieRepository = MovieRepository(dao)
-        factory = MovieFavoritesViewModelFactory(movieRepository)
+        val application = requireNotNull(this.activity).application
+        dao = AppDatabase.getInstance(application).MovieDao
+        //dao = AppDatabase.getInstance(requireActivity().application).MovieDao
+
+        repository = MovieRepository.getInstance(dao)
+        factory = MovieFavoritesViewModelFactory(repository)
+
         sharedViewModel = ViewModelProvider(this, factory).get(MovieFavoritesViewModel::class.java)
         binding.viewModelMovieFavorites = sharedViewModel
         binding.lifecycleOwner = this

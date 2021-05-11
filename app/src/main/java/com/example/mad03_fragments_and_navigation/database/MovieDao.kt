@@ -11,15 +11,18 @@ interface MovieDao {
     @Insert
     suspend fun create(movie: Movie): Long
 
+    /*
     @Update
     suspend fun update(movie: Movie)
 
     @Delete
     suspend fun delete(movieId: Long)
 
+     */
+
     @Query("DELETE FROM my_watchlist")
     suspend fun clearTable()
 
     @Query("SELECT * FROM my_watchlist ORDER BY id")
-    suspend fun getAll(): LiveData<List<Movie>>
+    fun getAll(): LiveData<List<Movie>>
 }

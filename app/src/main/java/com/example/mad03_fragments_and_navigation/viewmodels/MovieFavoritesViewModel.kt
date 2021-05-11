@@ -16,7 +16,7 @@ class MovieFavoritesViewModel(
 ) : ViewModel() {
     // TODO implement me
 
-
+/*
     val favoriteMovies = getAll()
 
 
@@ -26,11 +26,16 @@ class MovieFavoritesViewModel(
         }
     }
 
-    fun clearFavorites() {
+ */
+
+    /*
+     fun clearFavorites() {
         viewModelScope.launch {
             repository.clearTable()
         }
     }
+     */
+
 
     suspend fun clearTable() = repository.clearTable()
 
@@ -43,11 +48,28 @@ class MovieFavoritesViewModel(
         }
     }
 
+    /*
     fun createMovie(movie: Movie){
         viewModelScope.launch {
             val movieId = repository.create(movie)
             Log.i("MovieFavoritesViewModel", "ID is $movieId")
         }
     }
+
+     */
+
+    /*
+    fun deleteMovie(movieId: Long){
+        viewModelScope.launch {
+            repository.delete(movieId)
+        }
+    }
+
+    fun updateFavorite(movie: Movie){
+        viewModelScope.launch {
+            repository.update(movie)
+        }
+    }
+     */
 
 }
