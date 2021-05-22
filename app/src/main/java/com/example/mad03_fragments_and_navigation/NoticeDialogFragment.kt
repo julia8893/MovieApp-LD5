@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +26,8 @@ import kotlinx.android.synthetic.main.dialog_edit_movie.*
 
 class NoticeDialogFragment(movieObj: Movie) : DialogFragment() {
 
+    private lateinit var editTextNote: String
+
     private lateinit var binding: DialogEditMovieBinding
     private lateinit var sharedViewModel: MovieFavoritesViewModel
     private lateinit var dao: MovieDao
@@ -32,7 +35,7 @@ class NoticeDialogFragment(movieObj: Movie) : DialogFragment() {
     private lateinit var factory: MovieFavoritesViewModelFactory
     private var selectedMovie = movieObj
 
-    /*
+
     // Use this instance of the interface to deliver action events
     internal lateinit var listener: NoticeDialogListener
 
@@ -40,9 +43,9 @@ class NoticeDialogFragment(movieObj: Movie) : DialogFragment() {
      * implement this interface in order to receive event callbacks.
      * Each method passes the DialogFragment in case the host needs to query it. */
     interface NoticeDialogListener {
-        fun onDialogPositiveClick(dialog: DialogFragment)
-        fun onDialogNegativeClick(dialog: DialogFragment)
+        fun onDialogPositiveClick(note: String)
     }
+
 
     // Override the Fragment.onAttach() method to instantiate the NoticeDialogListener
     override fun onAttach(context: Context) {
@@ -57,7 +60,7 @@ class NoticeDialogFragment(movieObj: Movie) : DialogFragment() {
                     " must implement NoticeDialogListener"))
         }
     }
-    */
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -92,22 +95,19 @@ class NoticeDialogFragment(movieObj: Movie) : DialogFragment() {
             // Pass null as the parent view because its going in the dialog layout
             builder.setView(inflater.inflate(R.layout.dialog_edit_movie, null))
                 // Add action buttons
-                .setPositiveButton(R.string.save) { _, _ ->
-                    Log.i("NoticeDialogFragment", "Save pressed, $selectedMovie")
-                    var noteEntered: String = editText_add_a_note.text.toString()
-                    Log.i("NoticeDialogFragment", "Note: $noteEntered")
-                    val updatedMovie = Movie(
-                        selectedMovie.title,
-                        selectedMovie.note
-                    )
-                    selectedMovie.note = noteEntered
-                    Log.i("NoticeDialogFragment", "Changed: $selectedMovie")
-                    // Add to DB
-                    sharedViewModel.editMovie(selectedMovie)
+                .setPositiveButton(R.string.save
+                ) { _, _ ->
+                    var addedNote = editText_add_a_note.text.toString()
+                    // Send the positive button event back to the host activity
+                    Log.i("NoticeDialogFragment", "Added Note: $addedNote")
+                    listener.onDialogPositiveClick(addedNote)
                 }
                 .setNegativeButton(R.string.cancel) { _, _ ->
                     Log.i("NoticeDialogFragment", "Cancel pressed")
                 }
+
+            editTextNote = editText_add_a_note.text.toString()
+
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
@@ -116,4 +116,19 @@ class NoticeDialogFragment(movieObj: Movie) : DialogFragment() {
         const val TAG = "NoticeDialogFragment"
     }
 
+
+    //Log.i("NoticeDialogFragment", "Save pressed, $selectedMovie")
+
+    //var noteEntered: String = editText_add_a_note.text.toString()
+
+    //Log.i("NoticeDialogFragment", "Note: $noteEntered")
+    //val updatedMovie = Movie(
+    //    selectedMovie.title,
+    //    selectedMovie.note
+    //)
+    //selectedMovie.note = noteEntered
+    //Log.i("NoticeDialogFragment", "Changed: $selectedMovie")
+    // Add to DB
+    //sharedViewModel.editMovie(selectedMovie)
+    //}
 }

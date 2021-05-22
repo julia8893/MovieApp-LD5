@@ -26,7 +26,7 @@ import com.example.mad03_fragments_and_navigation.viewmodels.MovieFavoritesViewM
 import com.example.mad03_fragments_and_navigation.viewmodels.MovieFavoritesViewModelFactory
 
 
-class FavoritesFragment : Fragment() {
+class FavoritesFragment : Fragment(), NoticeDialogFragment.NoticeDialogListener {
     private lateinit var binding: FragmentFavoritesBinding
     //private lateinit var bindingDialog: DialogEditMovieBinding
     private lateinit var sharedViewModel: MovieFavoritesViewModel
@@ -103,20 +103,17 @@ class FavoritesFragment : Fragment() {
         dialog.show(childFragmentManager, "NoticeDialogFragment")
     }
 
-    /*
+
+
     // The dialog fragment receives a reference to this Activity through the
     // Fragment.onAttach() callback, which it uses to call the following methods
     // defined by the NoticeDialogFragment.NoticeDialogListener interface
-    override fun onDialogPositiveClick(dialog: DialogFragment) {
+    override fun onDialogPositiveClick(note: String) {
         // User touched the dialog's positive button
-        Log.i("FavoritesFragment","Save pressed")
+        Log.i("FavoritesFragment","Got from Dialog: $note")
     }
 
-    override fun onDialogNegativeClick(dialog: DialogFragment) {
-        // User touched the dialog's negative button
-        Log.i("FavoritesFragment","Cancel pressed")
-    }
-     */
+
 
 
 }
