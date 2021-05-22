@@ -11,14 +11,13 @@ interface MovieDao {
     @Insert
     suspend fun create(movie: Movie): Long
 
-    /*
+
     @Update
     suspend fun update(movie: Movie)
 
-    @Delete
-    suspend fun delete(movieId: Long)
 
-     */
+    @Query("DELETE FROM my_watchlist WHERE id = :movieId")
+    suspend fun delete(movieId: Long)
 
     @Query("DELETE FROM my_watchlist")
     suspend fun clearTable()

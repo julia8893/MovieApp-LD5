@@ -28,16 +28,16 @@ class MovieRepository(private val movieDao: MovieDao) {
         return movieDao.create(movie)
     }
 
-    /*
+
     suspend fun update(movie: Movie) {
         movieDao.update(movie)
     }
+
 
     suspend fun delete(movieId: Long) {
         movieDao.delete(movieId)
     }
 
-     */
 
     suspend fun clearTable() =
         withContext(Dispatchers.IO) {

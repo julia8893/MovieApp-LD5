@@ -1,18 +1,21 @@
 package com.example.mad03_fragments_and_navigation.models
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.example.mad03_fragments_and_navigation.R
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "my_watchlist")
 data class Movie(
     @ColumnInfo(name = "title")
     var title: String = "",
     @Ignore
     var description: String = ""
-) {
+): Parcelable {
     @PrimaryKey
     @ColumnInfo(name = "id")
     var id: Long? = 0L

@@ -1,32 +1,25 @@
 package com.example.mad03_fragments_and_navigation.viewmodels
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.mad03_fragments_and_navigation.models.Movie
 import com.example.mad03_fragments_and_navigation.repositories.MovieRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MovieFavoritesViewModel(
     private val repository: MovieRepository
 ) : ViewModel() {
     // TODO implement me
 
-/*
-    val favoriteMovies = getAll()
+    val test: String = "Blabla"
+
+    private val _editNote = MutableLiveData<String>()
+
+    val editNote: LiveData<String>
+        get() = _editNote
 
 
-    private fun getAll() {
-        viewModelScope.launch {
-            repository.getAll()
-        }
-    }
-
- */
+    val favoriteMovies: LiveData<List<Movie>> = repository.getAll()
 
     /*
      fun clearFavorites() {
@@ -36,17 +29,35 @@ class MovieFavoritesViewModel(
     }
      */
 
+    init {
+
+
+    }
+
+
+    fun getNote(movie: Movie){
+        return
+    }
 
     suspend fun clearTable() = repository.clearTable()
 
 
-    fun addToFavorites(movie: Movie){
+    fun addToFavorites(movie: Movie) {
 
         viewModelScope.launch {
             val movieId = repository.create(movie)
             Log.i("MovieFavoritesViewModel", "ID is $movieId")
         }
     }
+
+    fun editMovie(movie: Movie) {
+
+        viewModelScope.launch {
+            repository.update(movie)
+        }
+    }
+
+
 
     /*
     fun createMovie(movie: Movie){
@@ -58,13 +69,17 @@ class MovieFavoritesViewModel(
 
      */
 
-    /*
-    fun deleteMovie(movieId: Long){
+
+    fun deleteMovie(movieId: Long) {
+
         viewModelScope.launch {
             repository.delete(movieId)
         }
+
     }
 
+
+/*
     fun updateFavorite(movie: Movie){
         viewModelScope.launch {
             repository.update(movie)

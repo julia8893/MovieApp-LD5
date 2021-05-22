@@ -21,8 +21,8 @@
     <fragment
         android:id="@+id/movieDetailFragment"
         android:name="com.example.mad03_fragments_and_navigation.MovieDetailFragment"
-        tools:layout="@layout/fragment_movie_detail"
-        android:label="Movie Details">
+        android:label="Movie Details"
+        tools:layout="@layout/fragment_movie_detail">
         <argument
             android:name="movieId"
             app:argType="string" />
@@ -32,7 +32,7 @@
         android:id="@+id/watchlistFragment"
         android:name="com.example.mad03_fragments_and_navigation.FavoritesFragment"
         android:label="@string/my_watchlist"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites"/>
     <fragment
         android:id="@+id/quizFragment"
         android:name="com.example.mad03_fragments_and_navigation.QuizFragment"
@@ -59,4 +59,9 @@
             android:id="@+id/action_quizEndFragment_to_quizFragment"
             app:destination="@id/quizFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/noteDialogFragment"
+        android:name="com.example.mad03_fragments_and_navigation.NoticeDialogFragment"
+        android:label="fragment_note_dialog"
+        tools:layout="@layout/fragment_note_dialog" />
 </navigation>
