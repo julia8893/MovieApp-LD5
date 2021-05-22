@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
@@ -30,6 +31,7 @@ import kotlinx.android.synthetic.main.dialog_edit_movie.*
 class FavoritesFragment : Fragment() {
     private lateinit var binding: FragmentFavoritesBinding
     private lateinit var bindingDialog: DialogEditMovieBinding
+    private lateinit var dialog: Dialog
 
     private lateinit var sharedViewModel: MovieFavoritesViewModel
     private lateinit var dao: MovieDao
@@ -107,25 +109,11 @@ class FavoritesFragment : Fragment() {
 
     fun showDialog(movieObj: Movie) {
 
-        val builder = AlertDialog.Builder(requireContext())
-        // Get the layout inflater
-        val inflater = requireActivity().layoutInflater;
-        val dialogLayout = DialogEditMovieBinding.inflate(layoutInflater)
+        val builder = AlertDialog.Builder(this)
+        with(builder){
 
+        }
 
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
-        builder.setView(dialogLayout.root)
-            // Add action buttons
-            .setPositiveButton(R.string.save) { _, _ ->
-                var newNote: String = editText_add_a_note.text.toString()
-                Log.i("FavoritesFragment","newNote: $newNote")
-                movieObj.note = newNote
-            }
-            .setNegativeButton(R.string.cancel) { _, _ ->
-
-            }
-        builder.create().show()
     }
 
 
