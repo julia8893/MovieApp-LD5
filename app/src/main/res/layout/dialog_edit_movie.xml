@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="note_dialog_fragment"
-            type="com.example.mad03_fragments_and_navigation.NoticeDialogFragment" />
+            name="movie"
+            type="com.example.mad03_fragments_and_navigation.models.Movie" />
 
         <variable
             name="favorites_fragment"
@@ -45,7 +45,7 @@
             android:layout_marginBottom="4dp"
             android:hint="@string/add_note_here"
             android:inputType="textEmailAddress"
-            android:text="@{movie_favorites_view_model.getNote()}" />
+            android:text="@{movie.note}" />
 
     </LinearLayout>
 </layout>
