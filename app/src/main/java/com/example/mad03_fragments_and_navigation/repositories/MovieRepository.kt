@@ -33,15 +33,15 @@ class MovieRepository(private val movieDao: MovieDao) {
     }
 
 
-    suspend fun delete(movieId: Long) {
-        movieDao.delete(movieId)
-    }
+    suspend fun delete(movieId: Long) {     // Dispatchers.Main
+        movieDao.delete(movieId)            // Dispatchers.Main
+    }                                       // Dispatchers.Main
 
 
-    suspend fun clearTable() =
-        withContext(Dispatchers.IO) {
-            movieDao.clearTable()
-        }
+    suspend fun clearTable() =              // Dispatchers.Main
+        withContext(Dispatchers.IO) {       // Dispatchers.IO (main-safety block)
+            movieDao.clearTable()           // Dispatchers.IO (main-safety block)
+        }                                   // Dispatchers.Main
 
     fun getAll(): LiveData<List<Movie>> {
         return movieDao.getAll()
