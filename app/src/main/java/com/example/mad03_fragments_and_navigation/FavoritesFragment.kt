@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -76,7 +77,6 @@ class FavoritesFragment : Fragment() {
 
     // This is called when recyclerview item edit button is clicked
     private fun onEditMovieClicked(movieObj: Movie) {
-        // TODO implement me
 
         showDialog(movieObj)
 
@@ -86,13 +86,9 @@ class FavoritesFragment : Fragment() {
 
     // This is called when recyclerview item remove button is clicked
     private fun onDeleteMovieClicked(movieId: Long) {
-        // TODO implement me
+
         sharedViewModel.deleteMovie(movieId)
         Log.i("FavoritesFragment", "onDeleteMovieClicked: $movieId")
-    }
-
-    private fun onClearClicked() {
-
     }
 
     private fun subscribeUI(adapter: FavoritesListAdapter) {
@@ -103,16 +99,22 @@ class FavoritesFragment : Fragment() {
 
     }
 
-    fun showNoteDialog(movieObj: Movie) {
-
-    }
-
     fun showDialog(movieObj: Movie) {
 
-        val builder = AlertDialog.Builder(this)
-        with(builder){
+        val dialogLayout = DialogEditMovieBinding.inflate(layoutInflater)
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setView(dialogLayout.root)
+        builder.setPositiveButton(R.string.save) { _, _ ->
+            var newNote = dialogLayout.editTextAddANote.text.toString()
+            Log.i("FavoritesFragment", "$newNote")
+            movieObj.note = newNote
+            sharedViewModel.editMovie(movieObj)
+        }
+        builder.setNegativeButton(R.string.cancel) { _, _ ->
 
         }
+        builder.create().show()
+
 
     }
 

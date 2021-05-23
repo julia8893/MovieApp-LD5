@@ -39,13 +39,12 @@
             android:id="@+id/editText_add_a_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="14dp"
             android:layout_marginTop="16dp"
-            android:layout_marginRight="4dp"
+            android:layout_marginRight="8dp"
             android:layout_marginBottom="4dp"
             android:hint="@string/add_note_here"
-            android:inputType="textEmailAddress"
-            android:text="@{movie.note}" />
+            android:inputType="textEmailAddress" />
 
     </LinearLayout>
 </layout>
